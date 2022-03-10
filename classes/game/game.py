@@ -13,9 +13,9 @@ class Game:
         self._clock = pygame.time.Clock()
         self._run = True
         self._max_score = 0
-        self.my_font = pygame.font.SysFont('Comic Sans MS', 30)
-        self.game_over_font = pygame.font.SysFont('Comic Sans MS', 50)
-        self.new_game_btn = Button(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 300, new_game_img, 0.5)
+        self._my_font = pygame.font.SysFont('Comic Sans MS', 30)
+        self._game_over_font = pygame.font.SysFont('Comic Sans MS', 50)
+        self._new_game_btn = Button(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + 300, new_game_img, 0.5)
 
     def play(self):
         self._new_game()
@@ -29,11 +29,11 @@ class Game:
                 if self._max_score < self._sprites.get_hero_score():
                     self._max_score = self._sprites.get_hero_score()
 
-                self.draw_end(self._max_score, self._sprites.get_hero_score())
+                self._draw_end(self._max_score, self._sprites.get_hero_score())
 
-                if self.new_game_btn.check_click():
+                if self._new_game_btn.check_click():
                     self._new_game()
-                    self.new_game_btn.clicked = False
+                    self._new_game_btn.clicked = False
 
             else:
                 if len(self._sprites.enemy.sprites()) < 6:
@@ -43,7 +43,7 @@ class Game:
                         self._sprites.create_boss()
                 if random.random() > 0.995 and not self._sprites.has_first_aid_kit():
                     self._sprites.create_first_aid_kit()
-                self.draw_window()
+                self._draw_window()
 
     def _new_game(self):
         self._sprites.clear_sprites()
@@ -55,30 +55,30 @@ class Game:
     def get_sprites(self):
         return self._sprites
 
-    def draw_end(self, max_score, current_score):
+    def _draw_end(self, max_score, current_score):
 
-        text = self.game_over_font.render("Game Over", True, (255, 255, 255))
+        text = self._game_over_font.render("Game Over", True, (255, 255, 255))
         self._display.blit(text, (SCREEN_WIDTH // 2 - 120, SCREEN_HEIGHT // 2 + 100))
 
-        max_score_text = self.my_font.render("Max Score: " + str(max_score), True, (255, 255, 255))
+        max_score_text = self._my_font.render("Max Score: " + str(max_score), True, (255, 255, 255))
         self._display.blit(max_score_text, (SCREEN_WIDTH // 2 - 120, SCREEN_HEIGHT // 2 + 165))
 
-        current_score_text = self.my_font.render("Your Score: " + str(current_score), True, (255, 255, 255))
+        current_score_text = self._my_font.render("Your Score: " + str(current_score), True, (255, 255, 255))
         self._display.blit(current_score_text, (SCREEN_WIDTH // 2 - 120, SCREEN_HEIGHT // 2 + 205))
 
-        self.new_game_btn.update()
-        self.new_game_btn.draw(self._display)
+        self._new_game_btn.update()
+        self._new_game_btn.draw(self._display)
         pygame.display.update()
 
-    def blit_health(self):
-        text = self.my_font.render("Health: " + str(self._sprites.get_hero_health()), False, (255, 255, 255))
+    def _blit_health(self):
+        text = self._my_font.render("Health: " + str(self._sprites.get_hero_health()), False, (255, 255, 255))
         self._display.blit(text, (SCREEN_WIDTH - 165, 20))
 
-    def blit_score(self):
-        text = self.my_font.render("Score: " + str(self._sprites.get_hero_score()), False, (255, 255, 255))
+    def _blit_score(self):
+        text = self._my_font.render("Score: " + str(self._sprites.get_hero_score()), False, (255, 255, 255))
         self._display.blit(text, (20, 20))
 
-    def draw_window(self):
+    def _draw_window(self):
         self._display.fill((30, 30, 30))
         self._display.blit(background, (0, 0))
 
@@ -97,7 +97,7 @@ class Game:
         self._sprites.enemy_bullets.draw(self._display)
 
         self._sprites.buffs.draw(self._display)
-        self.blit_health()
-        self.blit_score()
+        self._blit_health()
+        self._blit_score()
 
         pygame.display.update()
