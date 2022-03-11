@@ -63,10 +63,25 @@ class Sprites:
         )
 
     def create_player_bullet(self, pos, rotate_coef, bullet_size):
-        self.player_bullets.add(PlayerBullet(bullet_img, pos, rotate_coef, bullet_size))
+        self.player_bullets.add(
+            PlayerBullet(
+                image=bullet_img,
+                pos=pos,
+                rotate_coef=rotate_coef,
+                size=bullet_size
+            )
+        )
 
     def create_enemy_bullet(self, pos, rotate_bullet, bullet_size, damage):
-        self.enemy_bullets.add(EnemyBullet(rocket_img, pos, rotate_bullet, bullet_size, damage))
+        self.enemy_bullets.add(
+            EnemyBullet(
+                image=rocket_img,
+                pos=pos,
+                rotate_coef=rotate_bullet,
+                size=bullet_size,
+                damage=damage
+            )
+        )
 
     def has_boss(self):
         for i in self.enemy:
