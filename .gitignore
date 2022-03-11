@@ -1,0 +1,10 @@
+/venv
+/.idea
+/__pycache__
+/classes/buffs/__pycache__
+/classes/enemy/__pycache__
+/classes/bullets/__pycache__
+/classes/buttons/__pycache__
+/classes/game/__pycache__
+/classes/spaceship/__pycache__
+/classes/sprites/__pycache__
